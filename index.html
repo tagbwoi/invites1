@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Үйлену тойына шақыру!">
+    <meta property="og:description" content="22.06.2025">
+    <meta property="og:image" content="" >
+
+
+<link rel="stylesheet"  href="css.css">
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Үйлену тойына шақыру!</title> 
+
+
+
+<style>
+  .heart {
+    position:  fixed ;
+    top: 0;
+    z-index: 9999;
+    pointer-events: none;
+    animation: fall linear forwards;
+    opacity: 0.7;
+  }
+
+  .heart-inner {
+    animation: sway ease-in-out infinite alternate;
+    display: inline-block;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0);
+      opacity: 0.7;
+    }
+    100% {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+  }
+
+  @keyframes sway {
+    0%   { transform: translateX(0); }
+    50%  { transform: translateX(10px); }
+    100% { transform: translateX(-10px); }
+  }
+</style>
+
+
+
+<style>
+    
+
+
+@media screen and (max-width: 1280px) {div.contentblock {width: 1200px;} } 
+@media screen and (max-width: 1140px) { div.contentblock {width: 1024px;} } 
+@media screen and (max-width: 992px) { div. contentblock {width: 970px;} } 
+
+
+
+
+
+
+.element-animation{ 
+    top: 0px; 
+    opacity: 0; 
+    position: relative; 
+} 
+.element-animation.element-show{ 
+position: relative; 
+top: 20px; 
+opacity: 1; 
+transition-duration: 1.4s; 
+}
+
+
+
+
+
+
+
+
+
+
+      .form-inner {
+   position: relative;
+}
+
+}
+.form-inner label {
+   display: block;
+   padding-left: 15px;
+   font-family: 'Roboto', sans-serif;
+   color: rgba(255, 255, 255, .6);
+   text-transform: uppercase;
+   font-size: 15px;
+padding: 0 15px;
+   margin: 10px 0 15px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+
+  transition: transform 0.3s ease;
+}
+
+/* Стили для кнопки с эффектом при нажатии */
+.btn {
+  transform: scale(1.1); /* Увеличиваем кнопку при активации */
+}
+
+
+
+.form-inner textarea {
+   width: 80%;
+   text-align: center;
+   margin-top: 5px;
+ 
+   border-radius: 10px;
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: 300;
+    background-color: #F7F5ED;
+    border-color: #1d3f57  0.5px;
+    letter-spacing: 0.11em;
+ height: 30px;
+   font-family: 'Roboto', sans-serif;
+  
+}
+
+.form-inner input[type="submit"] {
+    background: linear-gradient(to top left, #710014 0%, #710014 100%);
+       width: 80%;
+height: 30PX;
+text-align: center;
+    border: 0;
+    border-bottom: 2px  #aaa;
+       border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #FFFAF8  ;
+    letter-spacing: 0.11em;
+   font-family: 'Roboto', sans-serif;
+  padding: 0 10px;
+   margin: 10px 0 1px;
+
+}
+.radio-group{
+  text-align: left;
+  width: 80%;
+  font-size: 20px;
+  margin-top: 1px;
+  margin-bottom: 1px;
+  color: #000000;
+}
+
+
+
+body{
+background-color: #F7F5ED;
+}
+</style>
+
+
+
+
+ <style>
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+
+  </style>
+
+
+
+
+
+
+
+
+
+ <style>
+        /* Стили для модального окна */
+        .modal {
+            display: block; /* Модальное окно отображается сразу */
+            position: fixed;
+            z-index: 9999; /* Модальное окно поверх всех элементов */
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Затемнённый фон */
+        }
+        .modal-content {
+            background-color: #F7F5ED;
+            margin: 30% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            text-align: center;
+        }
+        .kk{
+          width: 100%;
+          height: 100%;
+     }
+          button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #F7F5ED;
+            border-radius: 5px;
+            border-color: #000000;
+        }
+        /* Отключение скроллинга страницы */
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+
+
+</head>
+<body>
+
+
+
+<center>
+<div class="fade-in" id="content">
+<img src="hgmm.jpg" style="width: 100%; " loading="eager">
+</div></center>
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="uli.jpg" style="width: 100%; margin-top: 30px;">
+</div></center>
+
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="hjh.jpg" style="width: 100%; margin-top: 80px;">
+</div></center>
+
+
+<iframe id="map_881402367" frameborder="0" width="100%" height="200px" src="https://makemap.2gis.ru/widget?data=eJwtj0Frg0AQhf_L9Cpho66rQg7BkhAa2ngoTVJysDrYhdWRdQNNxP_e0WQvC-_Ne_PNAGQrtFhtkRp0VmMP6fcA7tYhpLDBwl0tggedpQ6tm_0BSjJk2X9RSyGWIftOOzMlxP6euyqT4vSa9-9ZLE7H6U_Efl2HlJWfjfHPx11dbDf9z8fbus1XK45X2JdWd05TyyUs3HdthX-Qcv_zjR7UD8jbhPAkPJBuHc-XxIfotnDzASpaJL4ficQLg4Xvx0KpC-d1BWmkwvHiQVN0B-r1Y-EApnCQPmYDKRIZSMkZD8xkz22BikUcsypVyHhEDcNJLmVwMubrF9GcZ9XZK47_Rq5pXQ" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="hgmhg.jpg" style="width: 100%;margin-top: 80px; margin-bottom: 25px;"  >
+
+</div></center>
+
+
+
+
+
+
+
+
+<center style="margin-top: 0px;">
+<form class="transparent" method="post" id="form">
+  <div class="form-inner">
+    
+    <!-- Бірінші сұрақ -->
+    <div class="radio-group" required>
+      <p>Келесіз бе?</p>
+      <input type="radio" id="question1_yes" name="name" value="Иә барамын" required>
+      <label for="question1_yes">Иә барамын</label><br>
+      
+      <input type="radio" id="question1_with" name="name" value="Жұбайыммен барамын" required>
+      <label for="question1_with">Жұбайыммен барамын</label><br>
+      
+      <input type="radio" id="question1_no" name="name" value="Бара алмаймын" required>
+      <label for="question1_no">Бара алмаймын</label>
+    </div>
+    <br>
+
+    <!-- Екінші сұрақ (жаңа қосылды) -->
+    <div class="radio-group" required>
+      <p>Неше адам болып келесіздер?</p>
+      <input type="radio" id="question2_var1" name="choice" value="1-2" required>
+      <label for="question2_var1">1-2</label><br>
+      
+      <input type="radio" id="question2_var2" name="choice" value="3-4" required>
+      <label for="question2_var2">3-4</label><br>
+      
+      <input type="radio" id="question2_var3" name="choice" value="5-6" required>
+      <label for="question2_var3">5-6</label>
+    </div>
+    <br>
+
+    <textarea required
+      name="message"
+      maxlength="100"
+      id="message"
+      cols="30"
+      rows="4"
+      placeholder="Есіміңізді жазыңыз"
+    ></textarea>
+
+    <input type="submit" value="Жіберу" style="color:white;" class="btn">
+  </div>
+</form>
+</center>
+
+
+
+
+
+
+
+<center>
+<div class="element-animation"> 
+<img src="njm.jpg" style="width: 100%;margin-top: 50px; "  >
+
+</div></center>
+
+
+
+
+<!-- Модал -->
+<div id="musicModal" class="modal">
+    <div class="modal-content">
+        <img src="liul.jpg" class="kk">
+        <button id="playMusic" style="color: black;">Шақыртуды ашу</button>
+    </div>
+</div>
+
+<!-- Аудио -->
+<audio id="backgroundMusic" loop playsinline preload="auto">
+  <source src="M'Dee.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+  // ===== Параметрлер =====
+  const SPEED_PX_PER_SEC = 100;      // жылдамдық (px/сек)
+  const RESTART_DELAY_MS = 5000;    // пайдаланушы әрекетінен кейін қайта қосу кідірісі
+
+  // ===== Элементтер =====
+  const modal = document.getElementById("musicModal");
+  const playButton = document.getElementById("playMusic");
+  const audio = document.getElementById("backgroundMusic");
+
+  document.documentElement.style.scrollBehavior = 'auto';
+  document.body.style.scrollBehavior = 'auto';
+  document.body.style.overflow = 'hidden'; // модал ашық кезде скролды бұғаттау
+
+  // ===== Күй =====
+  let isRunning = false;    
+  let resumeTimer = null;   
+  let rafId = null;         
+  let lastTs = 0;           
+  let accum = 0;            
+
+  // Қауіпсіз скрол функциясы
+  function safeScrollBy(step) {
+    const before = window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop || 0;
+
+    window.scrollBy(0, step);
+
+    let after = window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop || 0;
+
+    if (after === before) {
+      document.documentElement.scrollTop = before + step;
+      after = window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop || 0;
+
+      if (after === before) {
+        document.body.scrollTop = before + step;
+      }
+    }
+  }
+
+  function atBottom() {
+    const maxScroll =
+      Math.max(document.documentElement.scrollHeight, document.body.scrollHeight) - window.innerHeight;
+    const y = window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop || 0;
+    return y >= maxScroll - 1;
+  }
+
+  // Негізгі цикл
+  function loop(ts) {
+    rafId = requestAnimationFrame(loop);
+    if (!isRunning) { lastTs = ts; return; }
+    if (!lastTs) lastTs = ts;
+
+    const dt = ts - lastTs;
+    lastTs = ts;
+
+    accum += (SPEED_PX_PER_SEC * dt) / 1000;
+
+    const step = Math.floor(accum);
+    if (step >= 1) {
+      accum -= step;
+
+      if (atBottom()) {
+        // === Соңына жеткенде тоқтату ===
+        stopAuto();
+        cancelAnimationFrame(rafId);
+        rafId = null;
+        return;
+      }
+
+      safeScrollBy(step);
+    }
+  }
+
+  // Авто-скролды басқару
+  function startAuto() { if (!isRunning) { isRunning = true; } }
+  function stopAuto()  { isRunning = false; }
+
+  function restartAfterDelay() {
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => startAuto(), RESTART_DELAY_MS);
+  }
+
+  // Пайдаланушы әрекеттерін тыңдау
+  const onInteract = () => { stopAuto(); restartAfterDelay(); };
+  window.addEventListener('touchstart', onInteract, { passive: true });
+  window.addEventListener('touchmove',  onInteract, { passive: true });
+  window.addEventListener('wheel',      onInteract, { passive: true });
+  window.addEventListener('mousedown',  onInteract, { passive: true });
+  window.addEventListener('keydown',    onInteract, { passive: true });
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) { stopAuto(); }
+    else { restartAfterDelay(); }
+  });
+
+  // Модалды жабу
+  function closeModal() {
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  playButton.addEventListener('click', () => {
+    audio.play().catch(()=>{});
+    closeModal();
+    if (!rafId) rafId = requestAnimationFrame(loop);
+    restartAfterDelay();
+  });
+</script>
+
+
+
+
+  <script>
+
+    document.addEventListener("DOMContentLoaded", function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      });
+
+      var elements = document.querySelectorAll(".fade-in");
+      elements.forEach(function(element) {
+        observer.observe(element);
+      });
+    });
+  </script>
+
+
+<script>
+    
+
+   const URL_APP = "https://script.google.com/macros/s/AKfycbz8V-6JJ2ZQpnLb3ofHvZRCWNeU1zS8rDLCgHqKCJKonsZHA3D77yuwm4HOZcBSkAHO/exec";
+
+const form = document.querySelector("#form");
+form.action = URL_APP;
+
+form.addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+
+  const name = document.querySelector("[name=name]:checked");
+  const choice = document.querySelector("[name=choice]:checked");
+  const message = document.querySelector("[name=message]");
+
+  let details = {
+    name: name ? name.value : '',
+    choice: choice ? choice.value : '',
+    message: message.value.trim(),
+  };
+
+  let formBody = [];
+  for (let property in details) {
+    let encodedKey = encodeURIComponent(property);
+    let encodedValue = encodeURIComponent(details[property]);
+    formBody.push(encodedKey + "=" + encodedValue);
+  }
+  formBody = formBody.join("&");
+
+  // форманы тазалау
+  if (name) name.checked = false;
+  if (choice) choice.checked = false;
+  message.value = '';
+
+  alert('Жауабыңызға рахмет!');
+
+  fetch(URL_APP, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+    },
+    mode: "no-cors",
+    body: formBody,
+  }).catch((err) => {
+    console.error('Error:', err);
+    alert("Ошибка!");
+  });
+});
+
+
+
+
+
+
+
+
+
+
+
+
+     function onEntry(entry) { 
+      entry.forEach(change => { 
+        if (change.isIntersecting) { 
+         change.target.classList.add('element-show'); 
+         
+        } 
+      }); 
+    } 
+        let options = { 
+      threshold: [0.5] }; 
+    let observer = new IntersectionObserver(onEntry, options); 
+    let elements = document.querySelectorAll('.element-animation'); 
+     
+    for (let elm of elements) { 
+      observer.observe(elm); 
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+<script>
+  class FallingHearts {
+    constructor(selector, options = {}) {
+      this.el = document.querySelector(selector);
+      this.settings = Object.assign({
+        delay: 300,
+        minSize: 16,
+        maxSize: 32,
+        fallSpeed: 1,
+        colors: ['#ff4d6d', '#ff9aa2', '#ff6f91', '#ffc0cb']
+      }, options);
+      this.el.style.overflowX = 'hidden';
+      this.start();
+    }
+
+    start() {
+      if (!this.animId) {
+        this.animId = requestAnimationFrame(() => this.createHeart());
+      }
+    }
+
+    stop(graceful = false) {
+      cancelAnimationFrame(this.animId);
+      this.animId = null;
+
+      if (!graceful) {
+        const hearts = document.querySelectorAll('.heart');
+        hearts.forEach(h => h.remove());
+      }
+    }
+
+    createHeart() {
+      setTimeout(() => {
+        this.animId = requestAnimationFrame(() => this.createHeart());
+      }, this.settings.delay);
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'heart';
+
+      const inner = document.createElement('div');
+      inner.className = 'heart-inner';
+      inner.innerText = '❤️';
+
+      const size = Math.floor(Math.random() * (this.settings.maxSize - this.settings.minSize)) + this.settings.minSize;
+      inner.style.fontSize = size + 'px';
+      inner.style.color = this.settings.colors[Math.floor(Math.random() * this.settings.colors.length)];
+
+      const fallTime = (document.documentElement.clientHeight * 0.007 + Math.random() * 5) * this.settings.fallSpeed;
+      const swayTime = (2 + Math.random() * 2);
+
+      wrapper.style.left = Math.random() * window.innerWidth + 'px';
+      wrapper.style.animationDuration = `${fallTime}s`;
+
+      inner.style.animationDuration = `${swayTime}s`;
+
+      wrapper.appendChild(inner);
+      this.el.appendChild(wrapper);
+
+      wrapper.addEventListener('animationend', () => {
+        wrapper.remove();
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    window.heartAnimation = new FallingHearts('body', {
+      delay: 300,
+      minSize: 10,
+      maxSize: 25,
+      fallSpeed: 1.5,
+      colors: ['#ff4d6d', '#ff6f91', '#ff85a1', '#ffb3c1']
+    });
+  });
+</script>
+
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https: //fonts.googleapis.com/css2?family= Piazzolla :wght@100 & display=swap" rel="stylesheet">
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" async></script>
+</body>
+</html>
