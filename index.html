@@ -11,7 +11,7 @@
  <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta property="og:title" content="Үйлену тойына шақыру!">
-    <meta property="og:description" content="01.08.2026">
+    <meta property="og:description" content="22.06.2025">
     <meta property="og:image" content="" >
 
 
@@ -63,7 +63,7 @@
 
 @media screen and (max-width: 1280px) {div.contentblock {width: 1200px;} } 
 @media screen and (max-width: 1140px) { div.contentblock {width: 1024px;} } 
-@media screen and (max-width: 992px) { div. contentblock {width: 970px;} } 
+@media screen and (max-width: 992px) { div.contentblock {width: 970px;} } 
 
 
 
@@ -249,14 +249,15 @@ background-color: #F7F5ED;
 </div></center>
 
 
-
 <center>
-<div class="element-animation"> 
-<img src="uli.jpg" style="width: 100%; margin-top: 30px;">
-</div></center>
-
-
-
+  <div class="element-animation"> 
+    
+    
+    <!-- Добавили z-index и принудительную видимость -->
+    <h2 id="guest-name" style="font-family: 'Piazzolla', serif; color: #710014; margin-top: 20px; display: none; position: relative; z-index: 10; opacity: 1 !important; font-size: 30px;"></h2>
+    <img src="uli.jpg" id="main-invite-img" style="width: 100%; margin-top: 30px;">
+  </div>
+</center>
 
 
 
@@ -266,7 +267,8 @@ background-color: #F7F5ED;
 </div></center>
 
 
-<iframe id="map_948672146" frameborder="0" width="100%" height="600px" src="https://makemap.2gis.ru/widget?data=eJw1jsFuxCAMRP_FvaIVsAQSPmCr3vZWqdUeouC2SCRGxCt1G-XfS5LWJ8sznnkLUAlYMDwjjcgl4gz-fQF-ZAQPF-z5XhAE5EIZC-_6AgMlKlV_krpVH7rqHDltH3UNOA8lZo40HYeflyngN3gl_2cV8HkUPra4v7YrxYmrf6AKFaeedxhnT61U1iphziflnNHtrf7HAN46ud4EjH2-0hyPwgVSz-B3r9KNM65rrOm0gLTJW5o6G9PITmnjGlfxiMYKZ2poBaeUXr8Q09t-5XLH9RfEAlkg" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+<iframe id="map_881402367" frameborder="0" width="100%" height="200px" src="https://makemap.2gis.ru/widget?data=eJwtj0Frg0AQhf_L9Cpho66rQg7BkhAa2ngoTVJysDrYhdWRdQNNxP_e0WQvC-_Ne_PNAGQrtFhtkRp0VmMP6fcA7tYhpLDBwl0tggedpQ6tm_0BSjJk2X9RSyGWIftOOzMlxP6euyqT4vSa9-9ZLE7H6U_Efl2HlJWfjfHPx11dbDf9z8fbus1XK45X2JdWd05TyyUs3HdthX-Qcv_zjR7UD8jbhPAkPJBuHc-XxIfotnDzASpaJL4ficQLg4Xvx0KpC-d1BWmkwvHiQVN0B-r1Y-EApnCQPmYDKRIZSMkZD8xkz22BikUcsypVyHhEDcNJLmVwMubrF9GcZ9XZK47_Rq5pXQ" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
+
 
 
 
@@ -361,7 +363,7 @@ background-color: #F7F5ED;
 
 <script>
   // ===== Параметрлер =====
-  const SPEED_PX_PER_SEC = 50;      // жылдамдық (px/сек)
+  const SPEED_PX_PER_SEC = 100;      // жылдамдық (px/сек)
   const RESTART_DELAY_MS = 5000;    // пайдаланушы әрекетінен кейін қайта қосу кідірісі
 
   // ===== Элементтер =====
@@ -502,7 +504,7 @@ background-color: #F7F5ED;
 <script>
     
 
-   const URL_APP = "https://script.google.com/macros/s/AKfycbzjB1YgKn1DH3GBTPV3i8BJDLfKSX5SDTfeZ5SFl6dA0LF2tJXPZBvFvJGfmCl8GM1S/exec";
+   const URL_APP = "https://script.google.com/macros/s/AKfycbz8V-6JJ2ZQpnLb3ofHvZRCWNeU1zS8rDLCgHqKCJKonsZHA3D77yuwm4HOZcBSkAHO/exec";
 
 const form = document.querySelector("#form");
 form.action = URL_APP;
@@ -666,13 +668,39 @@ form.addEventListener("submit", async (ev) => {
       colors: ['#ff4d6d', '#ff6f91', '#ff85a1', '#ffb3c1']
     });
   });
+document.addEventListener("DOMContentLoaded", function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const guestName = urlParams.get('n'); 
+    
+    const inviteImg = document.getElementById('main-invite-img');
+    const nameDisplay = document.getElementById('guest-name');
+    const nameInput = document.getElementById('message');
+
+    if (guestName) {
+        // Убираем плюсы, если они есть в ссылке, и заменяем на пробелы
+        const cleanName = guestName.replace(/\+/g, ' ');
+
+        // 1. Меняем картинку на пустую
+        if (inviteImg) inviteImg.src = "uli1.jpg";
+        
+        // 2. Формируем фразу "Құрметті [Имя]!"
+        if (nameDisplay) {
+            nameDisplay.innerText = "Құрметті " + cleanName + "!";
+            nameDisplay.style.display = "block"; // Показываем текст
+            nameDisplay.style.opacity = "1";     // Делаем его видимым
+        }
+        
+        // 3. Заполняем поле в анкете внизу
+        if (nameInput) nameInput.value = cleanName;
+    }
+});
 </script>
 
 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https: //fonts.googleapis.com/css2?family= Piazzolla :wght@100 & display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Piazzolla:wght@400&display=swap" rel="stylesheet">
 
    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" async></script>
 </body>
