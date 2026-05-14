@@ -180,15 +180,20 @@
 /* Стили текстового поля */
 #message {
     width: 85%;
+    height: auto;           /* Позволим высоте подстраиваться под контент */
+    min-height: 45px;       /* Минимальная высота, чтобы текст был виден */
+    resize: none;           /* ЗАПРЕЩАЕМ пользователю растягивать поле (убирает лишний скролл) */
+    overflow: hidden;       /* Скрываем полосы прокрутки, пока текста мало */
+    
+    /* Ваши остальные стили */
     border: none;
     border-bottom: 1.5px solid #710014;
     background: transparent;
-    border-radius: 0;
-    margin-top: 30px;
     padding: 10px;
     font-size: 18px;
     outline: none;
     text-align: center;
+    font-family: 'Piazzolla', serif;
 }
 
 /* Кнопка отправить */
@@ -550,7 +555,7 @@ src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8
       
       <label class="custom-radio">
         <input type="radio" name="name" value="Өкінішке орай, келе алмаймын">
-        <div class="radio-btn">Келе алмаймын</div>
+        <div class="radio-btn">Өкінішке орай, келе алмаймын</div>
       </label>
     </div>
 
