@@ -93,6 +93,41 @@
     color: #ffffff;
     box-shadow: 0 4px 10px rgba(113, 0, 20, 0.3);
 }
+
+.map-container {
+    position: relative;
+    width: 95%;
+    margin: 0 auto;
+    border: 5px solid #710014;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(247, 245, 237, 0.6); /* Полупрозрачный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    pointer-events: auto;
+    transition: 0.3s;
+}
+
+.map-overlay span {
+    background: #710014;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-family: 'Piazzolla', serif;
+}
+
+/* Когда контейнер активен — скрываем слой и даем доступ к карте */
+.map-container.active .map-overlay {
+    opacity: 0;
+    pointer-events: none;
+}
 </style>
 
 
@@ -385,7 +420,11 @@ background-color: #F7F5ED;
 
 <center>
 
-<iframe 
+<div class="map-container" onclick="this.classList.add('active')">
+    <div class="map-overlay">
+        <span>Картаны ашу үшін басыңыз</span>
+    </div>
+  <iframe 
 id="map_76968865" 
 
 frameborder="0" 
@@ -393,6 +432,9 @@ style="border: 5px solid #710014; border-radius: 20px; width: 95%; height: 300px
 src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8ERt1kYckybVoJ_92h6Bzfr3lG8KHBgE2BvkUKFgfIP0agS4-Qwz1WdAwIEfTB9xjo6o9Qe-cD-zdCZfJTsU-W3NwQT5uSmmIt3rbliYo7sd2Up-f1S7mXj3srzhxtcKiD7cn6jgss_Dx0DZ4hl-L_pgi-FqDL_O6PZudtR5yvPUPbrqIrrElXmZBpKqNYr6QxscoO3LcN5KlR0yGCtup3frDLwxFcRZAvWWVinWihpc7SCNzsL3NxIlSiEq1uDfN53zKd4VUm9869fiO696tK4YjTL2WdY0U" sandbox="allow-modals allow-forms allow-scripts allow-same-origin allow-popups allow-top-navigation-by-user-activation"></iframe>
 
 
+
+</div>
+    
 
 
 
