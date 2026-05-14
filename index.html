@@ -128,6 +128,82 @@
     opacity: 0;
     pointer-events: none;
 }
+
+/* Заголовки формы */
+.form-title {
+    font-family: 'Piazzolla', serif;
+    color: #710014;
+    font-size: 22px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-subtitle {
+    font-family: 'Piazzolla', serif;
+    color: #710014;
+    font-size: 18px;
+    margin-top: 25px;
+    text-align: center;
+}
+
+/* Стили кнопок выбора (attendance) */
+.attendance-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 85%;
+    margin: 0 auto;
+}
+
+.custom-radio input {
+    display: none; /* Скрываем стандартный кружок */
+}
+
+.radio-btn {
+    border: 1.5px solid #710014;
+    border-radius: 25px;
+    padding: 12px 15px;
+    text-align: center;
+    color: #710014;
+    font-family: 'Piazzolla', serif;
+    transition: 0.3s;
+    cursor: pointer;
+    background: transparent;
+}
+
+.custom-radio input:checked + .radio-btn {
+    background-color: #710014;
+    color: white;
+    box-shadow: 0 4px 10px rgba(113, 0, 20, 0.2);
+}
+
+/* Стили текстового поля */
+#message {
+    width: 85%;
+    border: none;
+    border-bottom: 1.5px solid #710014;
+    background: transparent;
+    border-radius: 0;
+    margin-top: 30px;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    text-align: center;
+}
+
+/* Кнопка отправить */
+.btn-submit {
+    margin-top: 40px;
+    background: #710014 !important;
+    color: white !important;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 18px;
+    font-family: 'Piazzolla', serif;
+    width: 85%;
+    box-shadow: 0 5px 15px rgba(113, 0, 20, 0.3);
+}
 </style>
 
 
@@ -457,69 +533,41 @@ src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8
 <form class="transparent" method="post" id="form">
   <div class="form-inner">
     
-    <!-- Бірінші сұрақ -->
-    <div class="radio-group" required>
-      <p>Келесіз бе?</p>
-      <input type="radio" id="question1_yes" name="name" value="Иә барамын" required>
-      <label for="question1_yes">Иә барамын</label><br>
+    <!-- Заголовок анкеты -->
+    <p class="form-title">Тойымыздың қадірлі қонағы болыңыз!</p>
+
+    <!-- Первый вопрос: Придете ли вы? -->
+    <div class="attendance-options">
+      <label class="custom-radio">
+        <input type="radio" name="name" value="Иә, әрине келемін" required>
+        <div class="radio-btn">Иә, әрине келемін</div>
+      </label>
       
-      <input type="radio" id="question1_with" name="name" value="Жұбайыммен барамын" required>
-      <label for="question1_with">Жұбайыммен барамын</label><br>
+      <label class="custom-radio">
+        <input type="radio" name="name" value="Жұбайыммен келемін">
+        <div class="radio-btn">Жұбайыммен келемін</div>
+      </label>
       
-      <input type="radio" id="question1_no" name="name" value="Бара алмаймын" required>
-      <label for="question1_no">Бара алмаймын</label>
+      <label class="custom-radio">
+        <input type="radio" name="name" value="Өкінішке орай, келе алмаймын">
+        <div class="radio-btn">Келе алмаймын</div>
+      </label>
     </div>
-    <br>
 
-    <!-- Екінші сұрақ (жаңа қосылды)
-    <div class="radio-group" required>
-      <p>Неше адам болып келесіздер?</p>
-      <input type="radio" id="question2_var1" name="choice" value="1-2" required>
-      <label for="question2_var1">1-2</label><br>
-      
-      <input type="radio" id="question2_var2" name="choice" value="3-4" required>
-      <label for="question2_var2">3-4</label><br>
-      
-      <input type="radio" id="question2_var3" name="choice" value="5-6" required>
-      <label for="question2_var3">5-6</label>
+    <!-- Второй вопрос: Сколько человек (плитка 2х2) -->
+    <p class="form-subtitle">Қанша адам келесіздер?</p>
+    <div class="people-selection-grid">
+      <label class="person-option"><input type="radio" name="count" value="1" required><div class="box">1</div></label>
+      <label class="person-option"><input type="radio" name="count" value="2"><div class="box">2</div></label>
+      <label class="person-option"><input type="radio" name="count" value="3"><div class="box">3</div></label>
+      <label class="person-option"><input type="radio" name="count" value="4"><div class="box">4</div></label>
     </div>
-    <br> -->
 
-<p style="font-size: 19px;text-align: center; font-family: 'Piazzolla', serif; color: #710014;">Қанша адам келесіздер?</p>
+    <!-- Поле для имени -->
+    <textarea required name="message" maxlength="100" id="message" cols="30" rows="1" placeholder="Есіміңізді жазыңыз"></textarea>
 
-<div class="people-selection-grid">
-  <label class="person-option">
-    <input type="radio" name="count" value="1" required>
-    <div class="box">1</div>
-  </label>
-  
-  <label class="person-option">
-    <input type="radio" name="count" value="2">
-    <div class="box">2</div>
-  </label>
-  
-  <label class="person-option">
-    <input type="radio" name="count" value="3">
-    <div class="box">3</div>
-  </label>
-  
-  <label class="person-option">
-    <input type="radio" name="count" value="4">
-    <div class="box">4</div>
-  </label>
-</div>
-
-
-    <textarea required
-      name="message"
-      maxlength="100"
-      id="message"
-      cols="30"
-      rows="4"
-      placeholder="Есіміңізді жазыңыз"
-    ></textarea>
-
-    <input type="submit" value="Жіберу" style="color:white;" class="btn">
+    <!-- Кнопка отправить -->
+    <input type="submit" value="Жауапты жіберу" class="btn-submit">
   </div>
 </form>
 </center>
