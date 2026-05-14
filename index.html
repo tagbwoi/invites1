@@ -53,6 +53,46 @@
     50%  { transform: translateX(10px); }
     100% { transform: translateX(-10px); }
   }
+
+  /* Контейнер-сетка: 2 колонки */
+.people-selection-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Создает два равных столбца */
+    gap: 15px;                      /* Отступ между кнопками */
+    max-width: 300px;               /* Ограничиваем ширину сетки */
+    margin: 20px auto;              /* Центрируем всю сетку */
+}
+
+/* Скрываем стандартную радио-точку */
+.person-option input {
+    display: none;
+}
+
+/* Стиль самой "плитки" */
+.person-option .box {
+    border: 2px solid #710014;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Piazzolla', serif;
+    font-size: 24px;
+    color: #710014;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+/* Стиль при наведении (для ПК) */
+.person-option .box:hover {
+    background-color: rgba(113, 0, 20, 0.05);
+}
+
+/* Стиль активной (выбранной) кнопки */
+.person-option input:checked + .box {
+    background-color: #710014;
+    color: #ffffff;
+    box-shadow: 0 4px 10px rgba(113, 0, 20, 0.3);
+}
 </style>
 
 
@@ -111,16 +151,26 @@ transition-duration: 1.4s;
     }
 
 
+/* Ищем этот блок в вашем коде */
 .countdown-item span {
-       display: block;
-    font-size: 35px;
+    display: block;
+    font-size: 55px;            /* Увеличили с 35px до 55px */
+    font-weight: 800;           /* Сделали жирным (Bold) */
     margin-bottom: 1px;
-    color: #3F3F3F;
+    color: #710014;             /* Сделал в цвет вашей темы (бордовый), чтобы смотрелось стильнее */
     border-radius: 5px;
     padding: 5px;
     animation: pulse 1s ease infinite alternate;
+    line-height: 1.1;           /* Немного поджали высоту строки для аккуратности */
 }
 
+.countdown-container h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: #710014;
+    align-self: center; /* Центрируем по вертикали */
+    margin-top: -20px;  /* Немного поднимаем, если двоеточия упадут слишком низко */
+}
 
 
 
@@ -379,7 +429,7 @@ src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8
     </div>
     <br>
 
-    <!-- Екінші сұрақ (жаңа қосылды) -->
+    <!-- Екінші сұрақ (жаңа қосылды)
     <div class="radio-group" required>
       <p>Неше адам болып келесіздер?</p>
       <input type="radio" id="question2_var1" name="choice" value="1-2" required>
@@ -391,7 +441,32 @@ src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8
       <input type="radio" id="question2_var3" name="choice" value="5-6" required>
       <label for="question2_var3">5-6</label>
     </div>
-    <br>
+    <br> -->
+
+<p style="font-size: 19px;text-align: center; font-family: 'Piazzolla', serif; color: #710014;">Қанша адам келесіздер?</p>
+
+<div class="people-selection-grid">
+  <label class="person-option">
+    <input type="radio" name="count" value="1" required>
+    <div class="box">1</div>
+  </label>
+  
+  <label class="person-option">
+    <input type="radio" name="count" value="2">
+    <div class="box">2</div>
+  </label>
+  
+  <label class="person-option">
+    <input type="radio" name="count" value="3">
+    <div class="box">3</div>
+  </label>
+  
+  <label class="person-option">
+    <input type="radio" name="count" value="4">
+    <div class="box">4</div>
+  </label>
+</div>
+
 
     <textarea required
       name="message"
@@ -577,6 +652,7 @@ src="https://makemap.2gis.ru/widget?data=eJw1jk1Pg0AQhv_LeCXNfgCL3GwaidpDiTZGTQ8
 
 <script>
     
+// Ищем именно ту кнопку из группы 'count', которая отмечена (checked)
 
    const URL_APP = "https://script.google.com/macros/s/AKfycbzjB1YgKn1DH3GBTPV3i8BJDLfKSX5SDTfeZ5SFl6dA0LF2tJXPZBvFvJGfmCl8GM1S/exec";
 
@@ -586,13 +662,18 @@ form.action = URL_APP;
 form.addEventListener("submit", async (ev) => {
   ev.preventDefault();
 
-  const name = document.querySelector("[name=name]:checked");
-  const choice = document.querySelector("[name=choice]:checked");
-  const message = document.querySelector("[name=message]");
+  // 1. Собираем данные ИМЕННО в момент нажатия кнопки «Отправить»
+  const attendance = document.querySelector('input[name="name"]:checked');
+  // Ищем выбранную плитку по имени "count"
+  const countElement = document.querySelector('input[name="count"]:checked'); 
+  const message = document.querySelector('textarea[name="message"]');
 
+  // 2. Формируем объект. 
+  // ВАЖНО: поле 'choice' — это ваша третья колонка в таблице.
+  // Мы берем значение из 'countElement' и кладем его в 'choice'.
   let details = {
-    name: name ? name.value : '',
-    choice: choice ? choice.value : '',
+    name: attendance ? attendance.value : '',
+    choice: countElement ? countElement.value : '', 
     message: message.value.trim(),
   };
 
@@ -604,9 +685,9 @@ form.addEventListener("submit", async (ev) => {
   }
   formBody = formBody.join("&");
 
-  // форманы тазалау
-  if (name) name.checked = false;
-  if (choice) choice.checked = false;
+  // Очистка формы после нажатия
+  if (attendance) attendance.checked = false;
+  if (countElement) countElement.checked = false;
   message.value = '';
 
   alert('Жауабыңызға рахмет!');
@@ -620,12 +701,9 @@ form.addEventListener("submit", async (ev) => {
     body: formBody,
   }).catch((err) => {
     console.error('Error:', err);
-    alert("Ошибка!");
+    alert("Ошибка отправки!");
   });
 });
-
-
-
 
 
 
